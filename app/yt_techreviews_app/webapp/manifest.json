@@ -1,0 +1,140 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.sap.yttechreviewsapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.13.0",
+      "toolsId": "c5d49f89-29e5-4db6-8082-53bc75da8f47"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/CatalogService/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "yt_techreviews_app-manage": {
+          "semanticObject": "yt_techreviews_app",
+          "action": "manage",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.121.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.sap.yttechreviewsapp.i18n.i18n"
+        }
+      },
+      "mainModel": {
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+            "synchronizationMode": "None",
+            "operationMode": "Server",
+            "autoExpandSelect": true,
+            "earlyRequests": true,
+            "groupId": "$auto"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.sap.yttechreviewsapp.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteHome",
+          "pattern": ":?query:",
+          "target": [
+            "TargetHome"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetHome": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Home",
+          "viewName": "Home"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.sap.yttechreviewsapp.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

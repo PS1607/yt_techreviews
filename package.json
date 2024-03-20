@@ -10,9 +10,11 @@
     "express": "^4"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.120.6"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "watch-yt_techreviews_app": "cds watch --open yt_techreviews_app/webapp/index.html?sap-ui-xx-viewCache=false"
   }
 }
