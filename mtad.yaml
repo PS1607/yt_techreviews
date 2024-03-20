@@ -1,0 +1,62 @@
+_schema-version: "3.1"
+ID: yt_techreviews
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: yt_techreviews-srv
+  type: javascript.nodejs
+  path: yt_techreviews-srv
+  requires:
+  - name: yt_techreviews-db
+  - name: yt_techreviews-auth
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+- name: yt_techreviews-db-deployer
+  type: com.sap.xs.hdi
+  path: yt_techreviews-db-deployer
+  requires:
+  - name: yt_techreviews-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: yt_techreviews
+  type: javascript.nodejs
+  path: yt_techreviews
+  requires:
+  - name: srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: srv-api
+      url: ~{srv-url}
+  - name: yt_techreviews-auth
+  parameters:
+    disk-quota: 256M
+    keep-existing-routes: true
+    memory: 256M
+resources:
+- name: yt_techreviews-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: yt_techreviews-auth
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: yt_techreviews-${org}-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
