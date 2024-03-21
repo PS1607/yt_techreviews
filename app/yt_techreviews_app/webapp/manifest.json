@@ -92,6 +92,10 @@
             "earlyRequests": true,
             "groupId": "$auto"
         }
+      },
+      "UIState": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/UIStateModel.json"
       }
     },
     "resources": {

@@ -14,12 +14,6 @@ sap.ui.define([
         return Controller.extend("com.sap.yttechreviewsapp.controller.Home", {
             onInit: function () {
 
-                var UIStateModel = new sap.ui.model.json.JSONModel();
-                var UIStateData = {
-                    editable: false
-                };
-                UIStateModel.setData(UIStateData);
-                this.getView().setModel(UIStateModel, "UIState");
             },
 
             onOpenAddDialog: function () {
@@ -60,9 +54,7 @@ sap.ui.define([
                 this.byId("deleteButton").setVisible(true);
 
                 var UIStateModel = this.getView().getModel("UIState");
-                var UIStateData = UIStateModel.getData();
-                UIStateData.editable = !UIStateData.editable;
-                UIStateModel.setData(UIStateData);
+                UIStateModel.setProperty("/editable", true); 
            },
 
             onDelete: function(){
@@ -126,9 +118,7 @@ sap.ui.define([
                 this.getView().byId("saveButton").setVisible(false);
 
                 var UIStateModel = this.getView().getModel("UIState");
-                var UIStateData = UIStateModel.getData();
-                UIStateData.editable = !UIStateData.editable;
-                UIStateModel.setData(UIStateData);
+                UIStateModel.setProperty("/editable", false); 
                 
             },
     });
