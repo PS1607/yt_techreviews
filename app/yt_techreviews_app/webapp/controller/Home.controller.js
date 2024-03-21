@@ -49,9 +49,6 @@ sap.ui.define([
             },
 
             onEditMode: function(){
-                this.byId("editModeButton").setVisible(false);
-                this.byId("saveButton").setVisible(true);
-                this.byId("deleteButton").setVisible(true);
 
                 var UIStateModel = this.getView().getModel("UIState");
                 UIStateModel.setProperty("/editable", true); 
@@ -114,8 +111,6 @@ sap.ui.define([
             },
 
             onSave: function(){
-                this.getView().byId("editModeButton").setVisible(true);
-                this.getView().byId("saveButton").setVisible(false);
 
                 var UIStateModel = this.getView().getModel("UIState");
                 UIStateModel.setProperty("/editable", false); 

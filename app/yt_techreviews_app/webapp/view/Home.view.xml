@@ -19,14 +19,14 @@
                                                 <OverflowToolbarLayoutData id="createButtonOverflowToolbarLayoutData" priority="NeverOverflow" />
                                             </layoutData>
                                         </Button>
-                                        <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="false" press="onDelete">
+                                        <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="{= ${UIState>/editable}}" press="onDelete">
                                             <layoutData>
                                                 <OverflowToolbarLayoutData id="deleteButtonOverflowToolbarLayoutData" priority="NeverOverflow" />
                                             </layoutData>
                                         </Button>
 
-                                        <Button id="saveButton" text="Save" type="Emphasized" visible="false" enabled="true" press="onSave" />
-                                        <Button id="editModeButton" visible="true" icon="sap-icon://edit" tooltip="Edit" press="onEditMode">
+                                        <Button id="saveButton" text="Save" type="Emphasized" visible="{= ${UIState>/editable}}" enabled="true" press="onSave" />
+                                        <Button id="editModeButton" visible="{= ${!UIState>/editable}}" icon="sap-icon://edit" tooltip="Edit" press="onEditMode">
                                             <layoutData>
                                                 <OverflowToolbarLayoutData id="editModeButtonOverflowToolbarLayoutData" priority="NeverOverflow" />
                                             </layoutData>
