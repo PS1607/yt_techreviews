@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+                        xmlns="sap.m">
+
+    <ColumnListItem type="Active" id="editColumn">
+        <cells>
+            <Input id="input1" value="{mainModel>videoTitle}"></Input>
+            <Input id="input2" value="{mainModel>channel}"></Input>
+            <Input id="input3" value="{mainModel>publishedOn}"></Input>
+            <Input id="input4" value="{mainModel>totalViews}"></Input>
+            <Input id="input5" value="{mainModel>link}"></Input>
+        </cells>
+    </ColumnListItem>
+
+</core:FragmentDefinition>

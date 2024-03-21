@@ -21,11 +21,15 @@
     "watch-yt_techreviews_app": "cds watch --open yt_techreviews_app/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
     "requires": {
       "[production]": {
         "auth": "xsuaa",
         "db": "hana"
-      }
+      },
+      "db": "sql"
     }
   }
 }

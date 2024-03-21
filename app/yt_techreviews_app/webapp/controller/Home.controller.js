@@ -2,7 +2,8 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/m/ColumnListItem",
-    "sap/m/Input"
+    "sap/m/Input",
+    "sap/ui/model/json/JSONModel"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -12,31 +13,13 @@ sap.ui.define([
 
         return Controller.extend("com.sap.yttechreviewsapp.controller.Home", {
             onInit: function () {
-                this._oTable = this.byId("table0");
 
-                this.oEditableTemplate = new ColumnListItem({
-                    cells: [
-                        new Input({
-                            value: "{mainModel>videoTitle}",
-                            change: [this.onInputChange, this]
-                        }), new Input({
-                            value: "{mainModel>channel}",
-                            change: [this.onInputChange, this]
-                        }), new Input({
-                            value: "{mainModel>publishedOn}",
-                            change: [this.onInputChange, this]
-                        }), new Input({
-                            value: "{mainModel>totalViews}",
-                            change: [this.onInputChange, this]
-                        }),  new Input({
-                            value: "{mainModel>link}",
-                            change: [this.onInputChange, this]
-                        })
-                    ]
-                });
-
-                this._createReadOnlyTemplates();
-                this.rebindTable(this.oReadOnlyTemplate, "Navigation");
+                var UIStateModel = new sap.ui.model.json.JSONModel();
+                var UIStateData = {
+                    editable: false
+                };
+                UIStateModel.setData(UIStateData);
+                this.getView().setModel(UIStateModel, "UIState");
             },
 
             onOpenAddDialog: function () {
@@ -75,7 +58,11 @@ sap.ui.define([
                 this.byId("editModeButton").setVisible(false);
                 this.byId("saveButton").setVisible(true);
                 this.byId("deleteButton").setVisible(true);
-                this.rebindTable(this.oEditableTemplate, "Edit");
+
+                var UIStateModel = this.getView().getModel("UIState");
+                var UIStateData = UIStateModel.getData();
+                UIStateData.editable = !UIStateData.editable;
+                UIStateModel.setData(UIStateData);
            },
 
             onDelete: function(){
@@ -137,31 +124,12 @@ sap.ui.define([
             onSave: function(){
                 this.getView().byId("editModeButton").setVisible(true);
                 this.getView().byId("saveButton").setVisible(false);
-                this._oTable.setMode(sap.m.ListMode.None);
-                this.rebindTable(this.oReadOnlyTemplate, "Navigation");
+
+                var UIStateModel = this.getView().getModel("UIState");
+                var UIStateData = UIStateModel.getData();
+                UIStateData.editable = !UIStateData.editable;
+                UIStateModel.setData(UIStateData);
                 
             },
-
-            _createReadOnlyTemplates: function () {
-                this.oReadOnlyTemplate = new sap.m.ColumnListItem({
-				cells: [
-					new sap.m.Text({
-						text: "{mainModel>videoTitle}"
-					}),
-					new sap.m.Text({
-						text: "{mainModel>channel}"
-					}),
-                    new sap.m.Text({
-						text: "{mainModel>publishedOn}"
-					}),
-					new sap.m.Text({
-						text: "{mainModel>totalViews}"
-					}),
-                    new sap.m.Text({
-						text: "{mainModel>link}"
-					})
-				]
-			});
-        },
-        });
     });
+});

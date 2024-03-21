@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+                        xmlns="sap.m">
+
+    <ColumnListItem type="Active" id="item0">
+        <cells>
+            <Text id="id1" text="{mainModel>videoTitle}"/>
+            <Text id="id2" text="{mainModel>channel}"/>
+            <Text id="id3" text="{mainModel>publishedOn}"/>
+            <Text id="id4" text="{mainModel>totalViews}"/>
+            <Text id="id5" text="{mainModel>link}" />
+            <Button id="id6" icon="sap-icon://edit" press="onSelect" />
+        </cells>
+    </ColumnListItem>
+
+</core:FragmentDefinition>
